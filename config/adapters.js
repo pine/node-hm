@@ -13,11 +13,12 @@
  */
 
 var url = require('url');
+var _   = require('underscore');
 
 if(process.env.MONGOHQ_URL){
   var params = url.parse(process.env.MONGOHQ_URL);
   
-  var mongo = {
+  var mongohq = {
     host: params.host,
     port: params.port,
     user: params.auth.split(':')[0],
@@ -27,9 +28,10 @@ if(process.env.MONGOHQ_URL){
 }
 
 else {
-	var mongo = {};
+  var mongohq = {};
 }
 
+console.log(process.env.MONGOHQ_URL);
 console.log(mongo);
 
 module.exports.adapters = {
@@ -57,12 +59,7 @@ module.exports.adapters = {
     database: 'hm'
   },
   
-  'mongohq': {
+  'mongohq': _.extend(mongohq, {
     module: 'sails-mongo',
-    host: mongo.host,
-    port: mongo.port,
-    user: mongo.user,
-    password: mongo.password,
-    database: mongo.database,
-  }
+  })
 };
