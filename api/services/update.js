@@ -79,13 +79,14 @@ function parsePrefecture(body){
       var itemElems = $(list).find('.list_inner a');
       
       var items = _.map(itemElems, function(item_){
-        var item  = $(item_);
-        var name  = item.find('h3').text();
-        var money = item.find('p:first-of-type').text();
+        var item      = $(item_);
+        var name      = item.find('h3').text();
+        var moneyText = item.find('p:first-of-type').text();
+        var money     = parseInt(moneyText.replace(/,/g, ''), 10);
         
         return {
           name : name,
-          money: parseInt(money, 10),
+          money: money,
         };
       });
       
