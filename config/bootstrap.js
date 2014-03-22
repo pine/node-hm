@@ -18,7 +18,7 @@ module.exports.bootstrap = function (cb) {
       sails.services['update']();
     },
     start: true,
-    timeZone: 'Japan/Tokyo',
+    timeZone: 'Asia/Tokyo',
   });
   
   // ‰‰ñXVˆ—
