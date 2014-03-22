@@ -43,10 +43,10 @@ function parsePrefectures(body){
 		var linkUrl = url.resolve(TARGET_URL, elem.attr('href'));
 		
 		var matches = linkUrl.match(/\d+$/);
-		var _id     = matches ? matches[0] : null;
+		var id      = matches ? matches[0] : null;
 		
 		return {
-			_id : _id,
+			_id: id,
 			name: name,
 			url : linkUrl
 		};
@@ -110,28 +110,24 @@ module.exports = function(){
     _.each(simplePrefectures, function(simplePrefecture){
       getPrefecture(simplePrefecture, function(err, prefecture){
         if(err){ return console.log(err); };
-        //console.log(prefecture);
         
-        // データを更新
-        Prefecture.update(
-          { _id: prefecture._id }, prefecture,
-          function(err, newRecord){
-            if(err){ return console.log(err); }
-            
-            // データが存在しない場合は新規に作成
-            if(!newRecord || _.isEmpty(newRecord)){
-              Prefecture.create(prefecture, function(err){
-                if(err){ return console.log(err); }
-                console.log('create prefecture: ' + prefecture.name);
-              });
-            }
-            
-            else {
-              console.log('update prefecture: ' + prefecture.name);
-            }
-          });
+        Prefecture.find(prefecture._id, function(err, entity){
+          if(err){ return console.log(err); }
+          
+          if(entity.length > 0){
+            _.extend(entity[0], prefecture);
+            entity[0].save(function(err){
+              if(err){ return console.log('save error:', err); }
+            });
+          }
+          
+          else {
+            Prefecture.create(prefecture, function(err){
+              if(err){ return console.log(err); }
+            });
+          }
+        });
       });
     });
   });
-  
 };

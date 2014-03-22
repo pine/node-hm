@@ -9,8 +9,7 @@
 module.exports = {
   attributes: {
     _id: {
-      type: 'integer',
-      primaryKey: true,
+      type: 'integer'
     },
     
     name: {

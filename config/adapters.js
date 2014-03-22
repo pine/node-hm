@@ -16,7 +16,7 @@ module.exports.adapters = {
 
   // If you leave the adapter config unspecified 
   // in a model definition, 'default' will be used.
-  'default': 'mongohq',
+  'default': 'mongo-local',
   
   // Persistent adapter for DEVELOPMENT ONLY
   // (data is preserved when the server shuts down)
@@ -34,6 +34,9 @@ module.exports.adapters = {
   
   'mongo-local': {
     module: 'sails-mongo',
+    host: 'localhost',
+    user: '',
+    password: '',
     database: 'hm',
   },
   

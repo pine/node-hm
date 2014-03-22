@@ -30,7 +30,7 @@ module.exports = {
       // Send a JSON response
       res.json(_.map(
         prefectures,
-        function(prefecture){ return _.pick(prefecture, '_id', 'name', 'updatedAt'); }
+  function(prefecture){ console.log(prefectures); return _.pick(prefecture, 'id', 'name', 'updatedAt'); }
       ));
     });
   },
@@ -44,7 +44,7 @@ module.exports = {
       if(err){ throw err; }
       
       // Send a JSON response
-      return res.json(_.pick(prefecture, '_id', 'name', 'menu', 'updatedAt'));
+      return res.json(_.pick(prefecture, 'id', 'name', 'menu', 'updatedAt'));
     });
   },
 
