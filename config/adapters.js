@@ -16,8 +16,8 @@ module.exports.adapters = {
 
   // If you leave the adapter config unspecified 
   // in a model definition, 'default' will be used.
-  'default': 'mysql',
-
+  'default': 'mongohq',
+  
   // Persistent adapter for DEVELOPMENT ONLY
   // (data is preserved when the server shuts down)
   disk: {
@@ -31,4 +31,14 @@ module.exports.adapters = {
     // Psst.. You can put your password in config/local.js instead
     // so you don't inadvertently push it up if you're using version control
   },
+  
+  'mongo-local': {
+    module: 'sails-mongo',
+    database: 'hm'
+  },
+  
+  'mongohq': {
+    module: 'sails-mongo',
+    url: process.env.MONGOHQ_URL,
+  }
 };
