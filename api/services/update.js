@@ -43,10 +43,10 @@ function parsePrefectures(body){
 		var linkUrl = url.resolve(TARGET_URL, elem.attr('href'));
 		
 		var matches = linkUrl.match(/\d+$/);
-		var id      = matches ? matches[0] : null;
+		var _id     = matches ? matches[0] : null;
 		
 		return {
-			id  : id,
+			_id : _id,
 			name: name,
 			url : linkUrl
 		};
@@ -114,7 +114,7 @@ module.exports = function(){
         
         // データを更新
         Prefecture.update(
-          prefecture.id, prefecture,
+          { _id: prefecture._id }, prefecture,
           function(err, newRecord){
             if(err){ return console.log(err); }
             

@@ -30,7 +30,7 @@ module.exports = {
       // Send a JSON response
       res.json(_.map(
         prefectures,
-        function(prefecture){ return _.pick(prefecture, 'id', 'name', 'updatedAt'); }
+        function(prefecture){ return _.pick(prefecture, '_id', 'name', 'updatedAt'); }
       ));
     });
   },
@@ -40,11 +40,11 @@ module.exports = {
    *    `/prefecture/:id`
    */
   show: function(req, res){
-    Prefecture.findOne(req.params.id, function(err, prefecture){
+    Prefecture.findOne({ _id: req.params.id }, function(err, prefecture){
       if(err){ throw err; }
       
       // Send a JSON response
-      return res.json(_.pick(prefecture, 'id', 'name', 'menu', 'updatedAt'));
+      return res.json(_.pick(prefecture, '_id', 'name', 'menu', 'updatedAt'));
     });
   },
 
