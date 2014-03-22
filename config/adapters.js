@@ -12,6 +12,9 @@
  * http://sailsjs.org/#documentation
  */
 
+var url = require('url');
+var MONGOHQ_URL = url.parse(process.env.MONGOHQ_URL);
+
 module.exports.adapters = {
 
   // If you leave the adapter config unspecified 
@@ -39,6 +42,10 @@ module.exports.adapters = {
   
   'mongohq': {
     module: 'sails-mongo',
-    url: process.env.MONGOHQ_URL,
+    host: MONGOHQ_URL.host,
+    port: MONGOHQ_URL.port,
+    user: MONGOHQ_URL.auth.split(':')[0],
+    password: MONGOHQ_URL.auth.split(':')[1],
+    database: MONGOHQ_URL.path.slice(1),
   }
 };
