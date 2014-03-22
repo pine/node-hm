@@ -24,15 +24,17 @@ module.exports = {
    *    `/prefectures`
    */
   index: function(req, res){
-    Prefecture.find({}, function(err, prefectures){
-      if(err){ throw err; }
-      
-      // Send a JSON response
-      res.json(_.map(
-        prefectures,
-        function(prefecture){ return _.pick(prefecture, 'id', 'name', 'updatedAt'); }
-      ));
-    });
+    Prefecture.find({})
+      .sort('_id ASC')
+      .done(function(err, prefectures){
+        if(err){ throw err; }
+        
+        // Send a JSON response
+        res.json(_.map(
+         prefectures,
+         function(prefecture){ return _.pick(prefecture, 'id', 'name', 'updatedAt'); }
+        ));
+      });
   },
   
   /**
