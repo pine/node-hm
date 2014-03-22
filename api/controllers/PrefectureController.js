@@ -30,7 +30,7 @@ module.exports = {
       // Send a JSON response
       res.json(_.map(
         prefectures,
-  function(prefecture){ console.log(prefectures); return _.pick(prefecture, 'id', 'name', 'updatedAt'); }
+        function(prefecture){ return _.pick(prefecture, 'id', 'name', 'updatedAt'); }
       ));
     });
   },
@@ -40,11 +40,17 @@ module.exports = {
    *    `/prefecture/:id`
    */
   show: function(req, res){
-    Prefecture.findOne({ _id: req.params.id }, function(err, prefecture){
+    Prefecture.find(req.params.id, function(err, prefecture){
       if(err){ throw err; }
       
       // Send a JSON response
-      return res.json(_.pick(prefecture, 'id', 'name', 'menu', 'updatedAt'));
+      if(prefecture.length > 0){
+        return res.json(_.pick(prefecture[0], 'id', 'name', 'menu', 'updatedAt'));
+      }
+      
+      else {
+        throw new Error('Can\'t find prefecture');
+      }
     });
   },
 
