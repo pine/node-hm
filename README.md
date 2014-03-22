@@ -1,2 +1,2 @@
-node-hm
-=======
+# node-hm
+### a Sails application
