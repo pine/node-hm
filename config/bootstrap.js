@@ -15,7 +15,7 @@ var cron = require('cron');
 module.exports.bootstrap = function (cb) {
   // XVˆ—
   var job = new cron.CronJob({
-    cronTime: '* * 0 * * * *',
+    cronTime: '* * * 0 * * *',
     onTick: function(){
       sails.services['update']();
     },
