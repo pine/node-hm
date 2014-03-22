@@ -44,7 +44,7 @@ module.exports = {
       if(err){ throw err; }
       
       // Send a JSON response
-      return res.json(_.pick(prefecture, 'id', 'name', 'items', 'updatedAt'));
+      return res.json(_.pick(prefecture, 'id', 'name', 'menu', 'updatedAt'));
     });
   },
 
