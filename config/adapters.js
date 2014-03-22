@@ -32,7 +32,7 @@ else {
 }
 
 console.log(process.env.MONGOHQ_URL);
-console.log(mongo);
+console.log(mongohq);
 
 module.exports.adapters = {
 
