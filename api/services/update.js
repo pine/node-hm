@@ -11,7 +11,6 @@ var TARGET_URL = 'http://www.hottomotto.com/menu/';
 
 function getPrefectures(callback){
 	
-	
 	request(TARGET_URL, function(err, res_, body){
 		if(err){
 			return callback(err);
@@ -58,12 +57,12 @@ function parsePrefectures(body){
 function getPrefecture(simplePrefecture, callback){
   request(simplePrefecture.url, function(err, res, body){
     if(err){ return callback(err); }
-    var menu = parsePrefecture(body);
+    var menu = parsePrefecture(body, simplePrefecture);
     return callback(null, _.extend(simplePrefecture, { menu: menu }));
   });
 }
 
-function parsePrefecture(body){
+function parsePrefecture(body, simplePrefecture){
   var $     = cheerio.load(body);
   var elems = $('#menu_all .list_inner > a');
   
@@ -80,12 +79,23 @@ function parsePrefecture(body){
       
       var items = _.map(itemElems, function(item_){
         var item      = $(item_);
+        var img       = item.find('.ph img');
         var name      = item.find('h3').text();
         var moneyText = item.find('p:first-of-type').text();
         var money     = parseInt(moneyText.replace(/,/g, ''), 10);
         
+        // id ‚ğ’Šo
+        var matches = item.attr('href').match(/\/(\d+)$/);
+        var id      = matches ? parseInt(matches[1]) : null;
+        
         return {
+          id   : id,
           name : name,
+          image: {
+            url   : url.resolve(simplePrefecture.url, img.attr('src')),
+            width : parseInt(img.attr('width'), 10),
+            height: parseInt(img.attr('height'), 10),
+          },
           money: money,
         };
       });
