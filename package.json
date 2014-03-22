@@ -14,8 +14,7 @@
     "request": "^2.34.0",
     "cheerio": "^0.13.1",
     "time": "^0.10.0",
-    "sails-mysql": "^0.9.9",
-    "sails-mongo": "^0.9.7"
+    "sails-mongo": "0.9.7"
   },
   "scripts": {
     "start": "node app.js",
