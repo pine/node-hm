@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * PrefectureController
  *
@@ -27,12 +29,15 @@ module.exports = {
     Prefecture.find({})
       .sort('_id ASC')
       .done(function(err, prefectures){
-        if(err){ throw err; }
+        if(err){
+          console.log(err);
+          return res.send(403);
+        }
         
         // Send a JSON response
         res.json(_.map(
-         prefectures,
-         function(prefecture){ return _.pick(prefecture, 'id', 'name', 'updatedAt'); }
+          prefectures,
+          function(prefecture){ return _.pick(prefecture, 'id', 'name', 'updatedAt'); }
         ));
       });
   },
@@ -43,7 +48,10 @@ module.exports = {
    */
   show: function(req, res){
     Prefecture.find(req.params.id, function(err, prefecture){
-      if(err){ throw err; }
+      if(err){
+        console.log(err);
+        return res.send(403);
+      }
       
       // Send a JSON response
       if(prefecture.length > 0){
@@ -51,7 +59,8 @@ module.exports = {
       }
       
       else {
-        throw new Error('Can\'t find prefecture');
+        console.log('Can\'t find prefecture');
+        return res.send(403);
       }
     });
   },
