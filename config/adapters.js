@@ -12,28 +12,6 @@
  * http://sailsjs.org/#documentation
  */
 
-var url = require('url');
-var _   = require('underscore');
-
-if(process.env.MONGOHQ_URL){
-  var params = url.parse(process.env.MONGOHQ_URL);
-  
-  var mongohq = {
-    host: params.host,
-    port: params.port,
-    user: params.auth.split(':')[0],
-    password: params.auth.split(':')[1],
-    database: params.path.slice(1)
-  };
-}
-
-else {
-  var mongohq = {};
-}
-
-console.log(process.env.MONGOHQ_URL);
-console.log(mongohq);
-
 module.exports.adapters = {
 
   // If you leave the adapter config unspecified 
@@ -56,10 +34,11 @@ module.exports.adapters = {
   
   'mongo-local': {
     module: 'sails-mongo',
-    database: 'hm'
+    database: 'hm',
   },
   
-  'mongohq': _.extend(mongohq, {
+  'mongohq': {
     module: 'sails-mongo',
-  })
+    url: process.env.MONGOHQ_URL,
+  },
 };
