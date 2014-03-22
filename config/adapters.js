@@ -26,14 +26,9 @@ module.exports.adapters = {
   
   // MySQL is the world's most popular relational database.
   // Learn more: http://en.wikipedia.org/wiki/MySQL
-  'mysql': {
+  'mysql-local': {
     module: 'sails-mysql',
-    host: 'localhost',
-    port: 3306,
-    user: 'dev',
     // Psst.. You can put your password in config/local.js instead
     // so you don't inadvertently push it up if you're using version control
-    password: 'dev', 
-    database: 'hm'
   },
 };
