@@ -13,7 +13,24 @@
  */
 
 var url = require('url');
-var MONGOHQ_URL = url.parse(process.env.MONGOHQ_URL);
+
+if(process.env.MONGOHQ_URL){
+  var params = url.parse(process.env.MONGOHQ_URL);
+  
+  var mongo = {
+    host: params.host,
+    port: params.port,
+    user: params.auth.split(':')[0],
+    password: params.auth.split(':')[1],
+    database: params.path.slice(1)
+  };
+}
+
+else {
+	var mongo = {};
+}
+
+console.log(mongo);
 
 module.exports.adapters = {
 
@@ -42,10 +59,10 @@ module.exports.adapters = {
   
   'mongohq': {
     module: 'sails-mongo',
-    host: MONGOHQ_URL.host,
-    port: MONGOHQ_URL.port,
-    user: MONGOHQ_URL.auth.split(':')[0],
-    password: MONGOHQ_URL.auth.split(':')[1],
-    database: MONGOHQ_URL.path.slice(1),
+    host: mongo.host,
+    port: mongo.port,
+    user: mongo.user,
+    password: mongo.password,
+    database: mongo.database,
   }
 };
