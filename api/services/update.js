@@ -2,8 +2,8 @@ var url      = require('url');
 var _        = require('underscore');
 var cheerio  = require('cheerio');
 
-//var request  = require('request');
-var request = require('request').defaults({ 'proxy': 'http://proxy.noc.kochi-tech.ac.jp:3128' });
+var request  = require('request');
+//var request = require('request').defaults({ 'proxy': 'http://proxy.noc.kochi-tech.ac.jp:3128' });
 
 var TARGET_URL = 'http://www.hottomotto.com/menu/';
 
