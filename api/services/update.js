@@ -1,5 +1,3 @@
-'use strict';
-
 var url      = require('url');
 var _        = require('underscore');
 var cheerio  = require('cheerio');
@@ -10,7 +8,8 @@ var request = require('request').defaults({ 'proxy': 'http://proxy.noc.kochi-tec
 var TARGET_URL = 'http://www.hottomotto.com/menu/';
 
 function getPrefectures(callback){
-	
+	'use strict';
+  
 	request(TARGET_URL, function(err, res_, body){
 		if(err){
 			return callback(err);
@@ -33,9 +32,11 @@ function getPrefectures(callback){
 }
 
 function parsePrefectures(body){
+  'use strict';
+  
 	var $     = cheerio.load(body);
 	var elems = $('.map_block li a');
-
+  
 	var prefectures = _.map(elems, function(elem_){
 		var elem    = $(elem_);
 		var name    = elem.find('img').attr('alt');
@@ -55,6 +56,8 @@ function parsePrefectures(body){
 }
 
 function getPrefecture(simplePrefecture, callback){
+  'use strict';
+  
   request(simplePrefecture.url, function(err, res, body){
     if(err){ return callback(err); }
     var menu = parsePrefecture(body, simplePrefecture);
@@ -63,6 +66,8 @@ function getPrefecture(simplePrefecture, callback){
 }
 
 function parsePrefecture(body, simplePrefecture){
+  'use strict';
+  
   var $     = cheerio.load(body);
   var elems = $('#menu_all .list_inner > a');
   
@@ -84,7 +89,7 @@ function parsePrefecture(body, simplePrefecture){
         var moneyText = item.find('p:first-of-type').text();
         var money     = parseInt(moneyText.replace(/,/g, ''), 10);
         
-        // id �𒊏o
+        // id を抽出
         var matches = item.attr('href').match(/\/(\d+)$/);
         var id      = matches ? parseInt(matches[1]) : null;
         
@@ -114,6 +119,8 @@ function parsePrefecture(body, simplePrefecture){
 }
 
 function update(){
+  'use strict';
+  
   console.log('update start');
   
   getPrefectures(function(err, simplePrefectures){
