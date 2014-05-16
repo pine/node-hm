@@ -19,6 +19,22 @@
 
 var _ = require('underscore');
 
+var checkUpdate = (function(){
+  var diff = 1000 * 60 * 60 * 24; // 1 day
+  var newUpdatedAt = new Date(2000, 1, 1); // initial
+  
+  return function(record){
+    var update = sails.services['update'];
+    var now = new Date();
+    
+    if(now - newUpdatedAt < diff){ return; }
+    if(record && now - record['updatedAt'] < diff){ return; }
+    
+    newUpdatedAt = now;
+    update();
+  };
+})();
+
 module.exports = {
   
   /**
@@ -33,6 +49,8 @@ module.exports = {
           console.log(err);
           return res.send(403);
         }
+        
+        checkUpdate(prefectures[0]);
         
         // Send a JSON response
         res.json(_.map(
@@ -55,6 +73,7 @@ module.exports = {
       
       // Send a JSON response
       if(prefecture.length > 0){
+        checkUpdate(prefecture[0]);
         return res.json(_.pick(prefecture[0], 'id', 'name', 'menu', 'updatedAt'));
       }
       
