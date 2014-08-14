@@ -1,6 +1,0 @@
-= node-hm =
-node-hm is api for luncher that is called Hotto Motto.
-
-== License ==
-* MIT License
-* Copyright (C) 2014 MIZUNE Pine.
