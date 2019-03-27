@@ -4,17 +4,17 @@
   "version": "0.0.0",
   "description": "a Sails application",
   "dependencies": {
-    "sails": "0.9.13",
-    "grunt": "0.4.1",
-    "sails-disk": "0.9.0",
-    "ejs": "0.8.4",
-    "optimist": "0.3.4",
-    "underscore": "1.6.0",
-    "cron": "1.0.4",
-    "request": "2.34.0",
-    "cheerio": "0.13.1",
-    "time": "0.10.0",
-    "sails-mongo": "0.9.7"
+    "sails": "1.1.0",
+    "grunt": "1.0.4",
+    "sails-disk": "1.1.0",
+    "ejs": "2.6.1",
+    "optimist": "0.6.1",
+    "underscore": "1.9.1",
+    "cron": "1.7.0",
+    "request": "2.88.0",
+    "cheerio": "0.22.0",
+    "time": "0.12.0",
+    "sails-mongo": "1.0.1"
   },
   "engines": {
   },
