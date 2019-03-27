@@ -1,6 +1,9 @@
 node-hm
 =======
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/pine/node-hm.svg)](https://greenkeeper.io/)
+
+
 node-hm is api for luncher that is called Hotto Motto.
 
 ## Development environment
